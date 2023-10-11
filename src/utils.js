@@ -45,7 +45,7 @@ export function isAnchorElement( node ) {
  */
 export function createAnchorElement( id, { writer } ) {
 	// Priority 5 - https://github.com/ckeditor/ckeditor5-anchor/issues/121.
-	const anchorElement = writer.createAttributeElement( 'a', { id }, { priority: 5 } );
+	const anchorElement = writer.createAttributeElement( 'a', { id, name: id }, { priority: 5 } );
 	writer.addClass("ck-anchor", anchorElement);
 	writer.setCustomProperty( 'anchor', true, anchorElement );
 
@@ -61,7 +61,7 @@ export function createAnchorElement( id, { writer } ) {
  */
 export function createEmptyAnchorElement( id, { writer } ) {
 	let anchorElement = null;
-	anchorElement = writer.createEmptyElement( 'a', { id });
+	anchorElement = writer.createEmptyElement( 'a', { id, name: id });
 
 	writer.addClass("ck-anchor", anchorElement);
 	writer.setCustomProperty( 'anchor', true, anchorElement );
@@ -77,7 +77,7 @@ export function createEmptyAnchorElement( id, { writer } ) {
  * @returns {module:engine/view/emptyelement~EmptyElement}
  */
 export function createEmptyPlaceholderAnchorElement( id, { writer } ) {
-	const anchorElement = writer.createRawElement('span', { id }, function (domDocument) {
+	const anchorElement = writer.createRawElement('span', { id, name: id }, function (domDocument) {
        domDocument.innerHTML = `[INVISIBLE ANCHOR: ${id}]`;
     });
     writer.addClass("ck-anchor", anchorElement);
