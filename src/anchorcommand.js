@@ -190,6 +190,7 @@ export default class AnchorCommand extends Command {
 				else if ( id !== '' ) {
 					const attributes = toMap( selection.getAttributes() );
 					attributes.set('id', id);
+					attributes.set('name', id);
 
 					truthyManualDecorators.forEach( item => {
 						attributes.set( item, true );

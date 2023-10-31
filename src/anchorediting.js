@@ -80,7 +80,7 @@ export default class AnchorEditing extends Plugin {
 			allowContentOf: '$inlineObject',
 			allowWhere: '$inlineObject',
 			inheritTypesFrom: '$inlineObject',
-			allowAttributes: [ 'class', 'id' ]
+			allowAttributes: [ 'class', 'id', 'name' ]
 		});
 
 		editor.conversion.for( 'dataDowncast' )
