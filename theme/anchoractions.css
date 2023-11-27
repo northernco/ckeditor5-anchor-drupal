@@ -45,3 +45,11 @@ div[contenteditable=true] .ck-anchor {
 	color: #00f;
 	cursor: auto;
 }
+
+div[contenteditable=true] .ck-anchor-placeholder:before {
+    content: "[INVISIBLE ANCHOR: ";
+}
+
+div[contenteditable=true] .ck-anchor-placeholder:after {
+    content: "]";
+}
