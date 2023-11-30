@@ -121,7 +121,8 @@ export default class AnchorEditing extends Plugin {
 				view: {
 					name: 'a',
 					attributes: {
-						id: true
+						id: true,
+						href: false
 					}
 				},
 				model: {
