@@ -45,9 +45,7 @@ export function isAnchorElement( node ) {
  * @returns {module:engine/view/attributeelement~AttributeElement}
  */
 export function createAnchorElement( id, { writer } ) {
-	// Priority 5 - https://github.com/ckeditor/ckeditor5-anchor/issues/121.
 	const anchorElement = writer.createAttributeElement( 'a', { id }, { priority: 5 } );
-	writer.addClass("ck-anchor", anchorElement);
 	writer.setCustomProperty( 'anchor', true, anchorElement );
 
 	return anchorElement;
