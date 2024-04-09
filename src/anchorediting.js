@@ -100,15 +100,18 @@ export default class AnchorEditing extends Plugin {
 			}
 		});
 
-		editor.conversion.for( 'editingDowncast' )
-			.attributeToElement( { model: 'anchorId', view: ( id, conversionApi ) => {
-				if (id) {
-					return createAnchorElement( ensureSafeUrl( id ), conversionApi );
-				}
-				else {
+		editor.conversion.for('editingDowncast').attributeToElement({
+			model: 'anchorId',
+			view: (id, conversionApi) => {
+				if (!id) {
 					return null;
 				}
-			} } );
+				const { writer } = conversionApi;
+				const anchorElement = createAnchorElement( ensureSafeUrl( id ), conversionApi );
+				writer.addClass("ck-anchor", anchorElement);
+				return anchorElement
+			}
+		});
 		editor.conversion.for('editingDowncast').elementToElement({
 			model: 'anchor',
 			view: (modelItem, viewWriter) => {
