@@ -19,7 +19,7 @@ const URL_REG_EXP = new RegExp(
 	'(^|\\s)' +
 	// Group 2: Detected anchor (begin with #, follows HTML5 restrictions on
   // allowed values).
-	'(#\\S+)'
+	'(#\\S+)$'
 );
 
 const URL_GROUP_IN_MATCH = 2;
