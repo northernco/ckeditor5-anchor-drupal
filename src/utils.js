@@ -26,15 +26,17 @@ const PROTOCOL_REG_EXP = /^((\w+:(\/{2,})?)|(\W))/i;
 export const LINK_KEYSTROKE = 'Ctrl+M';
 
 /**
- * Returns `true` if a given view node is the anchor element.
+ * Returns `true` if a given view node is the anchor element, or <a> with 
+ * id attribute.
  *
  * @param {module:engine/view/node~Node} node
  * @returns {Boolean}
  */
 export function isAnchorElement( node ) {
 	return (
-        node.is('attributeElement') && !!node.getCustomProperty( 'anchor' )
-    );
+        	(node.is('attributeElement') && !!node.getCustomProperty( 'anchor' )) ||
+		(node.is('attributeElement', 'a') && node.hasAttribute('id'))
+    	);
 }
 
 /**
