@@ -36,7 +36,7 @@ export default class AnchorUI extends Plugin {
 	 * @inheritDoc
 	 */
 	static get requires() {
-		return [ ContextualBalloon ];
+		return [ ContextualBalloon, 'LinkEditing', 'LinkUI' ];
 	}
 
 	/**
@@ -75,6 +75,13 @@ export default class AnchorUI extends Plugin {
 		 * @member {module:ui/panel/balloon/contextualballoon~ContextualBalloon}
 		 */
 		this._balloon = editor.plugins.get( ContextualBalloon );
+
+		/**
+  		 * The LinkUI plugin instance.
+     		 *
+		 * @private
+   		 */
+		this.linkPlugin = editor.plugins.get( 'LinkUI' );
 
 		// Create toolbar buttons.
 		this._createToolbarAnchorButton();
@@ -121,6 +128,7 @@ export default class AnchorUI extends Plugin {
 		const actionsView = new AnchorActionsView( editor.locale );
 		const anchorCommand = editor.commands.get( 'anchor' );
 		const unanchorCommand = editor.commands.get( 'unanchor' );
+		const linkCommand = editor.commands.get( 'link' );
 
 		actionsView.bind( 'id' ).to( anchorCommand, 'value' );
 		actionsView.editButtonView.bind( 'isEnabled' ).to( anchorCommand );
@@ -136,6 +144,12 @@ export default class AnchorUI extends Plugin {
 			editor.execute( 'unanchor' );
 			this._hideUI();
 		} );
+
+		// Show the LinkUI actions view the "Link" button is clicked.
+		this.listenTo( actionsView, 'editanchorlink', () => {
+			this.linkPlugin._addActionsView();
+			this._hideUI();
+		});
 
 		// Close the panel on esc key press when the **actions have focus**.
 		actionsView.keystrokes.set( 'Esc', ( data, cancel ) => {
@@ -294,6 +308,14 @@ export default class AnchorUI extends Plugin {
 		if ( this._areActionsInPanel ) {
 			return;
 		}
+
+		// The Link button should only be visible when the anchor is on a link.
+		if ( this._isSelectedLinkedAnchor() ) {
+			this.actionsView.linkButtonView.isVisible = true;
+		} else {
+			this.actionsView.linkButtonView.isVisible = false;
+		}
+
 
 		this._balloon.add( {
 			view: this.actionsView,
@@ -645,6 +667,19 @@ export default class AnchorUI extends Plugin {
 				return null;
 			}
 		}
+	}
+
+	/**
+	 * Detects whether the current selection is a linked anchor.
+	 *
+	 * @private
+	 */
+	_isSelectedLinkedAnchor() {
+		const selection = this.editor.model.document.selection;
+		return (
+			selection.hasAttribute('anchorId') &&
+			selection.hasAttribute('linkHref')
+		);
 	}
 
 	/**
