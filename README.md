@@ -1,9 +1,9 @@
-@justcaldwell/ckeditor5-anchor-drupal
+@northernco/ckeditor5-anchor-drupal
 ===================================
 
 This package implements the anchor feature for CKEditor 5. It allows inserting anchor elements (ID field) into the edited content and offers the UI to create and edit them.
 
-This is an issue fork of [@northernco/ckeditor5-anchor-drupal](https://github.com/northernco/ckeditor5-anchor-drupal) for work on [ID's are stripped from links [#3443785]](https://www.drupal.org/project/anchor_link/issues/3443785), and is **only** intended for testing/review related to that issue.
+This is a Drupal-adapted fork of [the original plugin by bvedad](https://github.com/bvedad/ckeditor5-anchor). 
 
 ## Table of contents
 
