@@ -131,6 +131,10 @@ export default class AnchorEditing extends Plugin {
 							return;
 						}
 
+						if (viewElement.hasAttribute('href')) {
+							return;
+						}
+
 						return viewElement.getAttribute( 'id' );
 					}
 				}
